@@ -1,7 +1,7 @@
 package main
 
 import (
-	"contrib-linter/passes/zap/logw"
+	"contrib-linter/pkg/passes/zap/logw"
 	"golang.org/x/tools/go/analysis/singlechecker"
 )
 

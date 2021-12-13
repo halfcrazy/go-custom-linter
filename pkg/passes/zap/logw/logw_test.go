@@ -1,9 +1,9 @@
 package logw_test
 
 import (
+	"contrib-linter/pkg/passes/zap/logw"
 	"testing"
 
-	"contrib-linter/passes/zap/logw"
 	"golang.org/x/tools/go/analysis/analysistest"
 )
 
