@@ -91,8 +91,11 @@ func checkPrintw(pass *analysis.Pass, call *ast.CallExpr, fn *types.Func) {
 		pass.Reportf(call.Lparen, "no args provided call to %s", fn.FullName())
 		return
 	}
-	if (argsNum-1)%2 == 1 {
-		pass.Reportf(call.Lparen, "invalid pair provided call to %s", fn.FullName())
+	// ignore dotdotdot
+	if !call.Ellipsis.IsValid() {
+		if (argsNum-1)%2 == 1 {
+			pass.Reportf(call.Lparen, "invalid pair provided call to %s", fn.FullName())
+		}
 	}
 	var keySet = make(map[string]bool)
 	for idx := 1; idx < argsNum; idx += 2 {
