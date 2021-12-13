@@ -1,4 +1,4 @@
-module contrib-linter
+module go-custom-linter
 
 go 1.17
 

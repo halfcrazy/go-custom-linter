@@ -5,5 +5,5 @@ fmt:
 	go fmt ./...
 
 build: fmt
-	CGO_ENABLED=0 go build -mod vendor -o ./zaplogw contrib-linter/cmd/zap/logw
+	CGO_ENABLED=0 go build -mod vendor -o ./zaplogw go-custom-linter/cmd/zap/logw
 
