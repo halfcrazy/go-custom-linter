@@ -98,14 +98,18 @@ func checkPrintw(pass *analysis.Pass, call *ast.CallExpr, fn *types.Func) {
 	for idx := 1; idx < argsNum; idx += 2 {
 		keyArg := call.Args[idx]
 		val := pass.TypesInfo.Types[keyArg].Value
-		if val.Kind() != constant.String {
-			pass.Reportf(call.Lparen, "none string key in pair provided call to %s", fn.FullName())
-		} else {
-			if keySet[constant.StringVal(val)] {
-				pass.Reportf(call.Lparen, "duplicate key %s in pair provided call to %s",
-					constant.StringVal(val), fn.FullName())
+		if val != nil {
+			if val.Kind() != constant.String {
+				pass.Reportf(call.Lparen, "none string key in pair provided call to %s", fn.FullName())
+				return
 			} else {
-				keySet[constant.StringVal(val)] = true
+				if keySet[constant.StringVal(val)] {
+					pass.Reportf(call.Lparen, "duplicate key %s in pair provided call to %s",
+						constant.StringVal(val), fn.FullName())
+					return
+				} else {
+					keySet[constant.StringVal(val)] = true
+				}
 			}
 		}
 	}
