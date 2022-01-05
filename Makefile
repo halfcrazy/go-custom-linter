@@ -1,5 +1,5 @@
 test-dep:
-	cp -r ./vendor/* ./pkg/passes/gorm/addressable/testdata/src/
+	cd pkg/passes/gorm/addressable/testdata/src/a && make src
 
 clean:
 	git clean -fd
